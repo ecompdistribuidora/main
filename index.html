@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecomp | Inteligência em Suprimentos B2B e B2G</title>
+    <style>
+        :root {
+            --bg-deep: #050505;
+            --bg-card: #11141d;
+            --bg-card-hover: #161b26;
+            --primary-blue: #2563eb;
+            --secondary-blue: #3b82f6;
+            --glow-blue: rgba(37, 99, 235, 0.3);
+            --text-white: #ffffff;
+            --text-dark: #0f172a;
+            --text-dark-muted: #334155;
+            --text-gray: #94a3b8;
+            --border-color: #1e293b;
+            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text-white);
+            background-color: var(--bg-deep);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: #ffffff;
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #334155;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-blue);
+        }
+
+        .header-contact {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-header {
+            background-color: var(--primary-blue);
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px var(--glow-blue);
+        }
+        .btn-header:hover { 
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--glow-blue);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: radial-gradient(circle at top right, #111d3b 0%, var(--bg-deep) 60%);
+            padding: 6rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-content {
+            flex: 1.2;
+            z-index: 1;
+            /* Bloco quase todo branco, iniciando o degradê bem na parte final */
+            background: linear-gradient(to bottom, #ffffff 90%, rgba(255, 255, 255, 0) 100%);
+            padding: 45px;
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-logo {
+            height: 120px;
+            width: auto;
+            display: block;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+        }
+        
+        .hero-content h1 span {
+            color: var(--primary-blue);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-dark-muted);
+            max-width: 600px;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+            color: var(--text-dark-muted);
+            transition: var(--transition);
+        }
+
+        .benefits-list li:hover {
+            transform: translateX(5px);
+        }
+
+        .benefits-list li::before {
+            content: "✓";
+            background-color: var(--primary-blue);
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px var(--glow-blue);
+        }
+
+        /* --- FORMULÁRIO NO HERO --- */
+        .hero-form-wrapper {
+            flex: 0.9;
+            z-index: 1;
+            max-width: 440px;
+            width: 100%;
+        }
+
+        .form-card {
+            background-color: var(--bg-card);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary-blue);
+        }
+
+        .form-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.15);
+        }
+
+        .form-card h2 {
+            color: var(--text-white);
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .form-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+            background-color: #0b0e14;
+            color: var(--text-white);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--secondary-blue);
+            background-color: var(--bg-deep);
+            box-shadow: 0 0 0 4px var(--glow-blue);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            box-shadow: 0 4px 15px var(--glow-blue);
+        }
+
+        .btn-submit:hover { 
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--glow-blue);
+        }
+
+        /* --- TRUST BAR --- */
+        .trust-bar {
+            background-color: var(--bg-deep);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 35px 5%;
+            gap: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .trust-item {
+            text-align: center;
+            max-width: 280px;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        .trust-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
+        }
+        .trust-item h4 { color: var(--secondary-blue); font-size: 1.15rem; margin-bottom: 6px; }
+        .trust-item p { color: var(--text-gray); font-size: 0.9rem; }
+
+        /* --- SECTIONS GENERAL --- */
+        section { padding: 6rem 5%; border-bottom: 1px solid var(--border-color); }
+        
+        .section-header {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 4rem auto;
+        }
+        .section-header h2 { font-size: 2.5rem; color: var(--text-white); margin-bottom: 15px; font-weight: 800; letter-spacing: -0.5px; }
+        .section-header h2 span { color: var(--secondary-blue); }
+        .section-header p { color: var(--text-gray); font-size: 1.15rem; }
+
+        /* --- QUEM SOMOS --- */
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .sobre-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            transition: var(--transition);
+        }
+
+        .sobre-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.15);
+        }
+
+        .sobre-card h3 {
+            color: var(--text-white);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .sobre-card p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* --- COMO FUNCIONA --- */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+        
+        .step-card {
+            background: var(--bg-card);
+            padding: 40px 25px 30px 25px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            background-color: var(--bg-card-hover);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 20px 35px -10px rgba(37, 99, 235, 0.2);
+        }
+        
+        .step-number {
+            background-color: var(--primary-blue);
+            color: #fff;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin: -62px auto 20px auto;
+            border: 4px solid var(--bg-deep);
+            box-shadow: 0 0 15px var(--glow-blue);
+            transition: var(--transition);
+        }
+
+        .step-card:hover .step-number {
+            transform: scale(1.1) rotate(5deg);
+            background-color: var(--secondary-blue);
+        }
+
+        .step-card h3 { color: var(--text-white); margin-bottom: 12px; font-size: 1.25rem; }
+        .step-card p { color: var(--text-gray); font-size: 0.95rem; }
+
+        /* --- PLANOS --- */
+        .planos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .plano-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plano-card.destacado {
+            border-color: var(--primary-blue);
+            background: linear-gradient(180deg, var(--bg-card) 0%, #0d162d 100%);
+            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.15);
+        }
+
+        .plano-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 25px 40px -10px rgba(37, 99, 235, 0.25);
+        }
+
+        .plano-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-white);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .plano-preco {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--secondary-blue);
+            margin: 15px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .plano-detalhe {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn-plano {
+            background-color: transparent;
+            color: var(--text-white);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: block;
+        }
+
+        .plano-card:hover .btn-plano, .plano-card.destacado .btn-plano {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+            color: #fff;
+            box-shadow: 0 4px 15px var(--glow-blue);
+        }
+
+        /* --- SEÇÃO FORNECEDOR --- */
+        .fornecedor-wrapper {
+            max-width: 1050px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .fornecedor-wrapper:hover {
+            border-color: var(--secondary-blue);
+            box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.15);
+        }
+
+        .fornecedor-text {
+            background: linear-gradient(135deg, #0b1329 0%, #050a14 100%);
+            color: #fff;
+            padding: 50px 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid var(--border-color);
+        }
+        
+        .fornecedor-text h2 { margin-bottom: 15px; font-size: 2.1rem; font-weight: 800; color: var(--text-white); }
+        .fornecedor-text p { color: var(--text-gray); margin-bottom: 25px; font-size: 1.05rem; }
+
+        .fornecedor-text ul li {
+            margin-bottom: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-white);
+        }
+
+        .fornecedor-form {
+            padding: 50px 40px;
+            flex: 1.1;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #030508;
+            color: var(--text-gray);
+            text-align: center;
+            padding: 4rem 5%;
+        }
+        
+        footer p { margin-bottom: 12px; }
+        footer .destaque { color: var(--text-white); font-weight: 700; font-size: 1.2rem; font-style: italic; margin-bottom: 20px;}
+        
+        /* WHATSAPP FLOAT */
+        .float-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            box-shadow: 0 15px 25px -5px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        .float-wa:hover { 
+            transform: scale(1.1) rotate(8deg); 
+            box-shadow: 0 20px 30px -5px rgba(37, 211, 102, 0.6);
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 992px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 4rem; }
+            .hero-content { display: flex; flex-direction: column; align-items: center; background: linear-gradient(to bottom, #ffffff 90%, rgba(255, 255, 255, 0) 100%); }
+            .hero-logo { margin: 0 auto 25px auto; }
+            .hero-content p { text-align: center; }
+            .benefits-list li { justify-content: center; text-align: left; }
+            .nav-menu { display: none; }
+            .fornecedor-wrapper { flex-direction: column; }
+            .fornecedor-text { border-right: none; border-bottom: 1px solid var(--border-color); }
+        }
+
+        @media (max-width: 600px) {
+            header { padding: 12px 20px; justify-content: center; }
+            .hero-content h1 { font-size: 2.3rem; }
+            section { padding: 4rem 20px; }
+            .form-card, .fornecedor-form, .fornecedor-text { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <ul class="nav-menu">
+            <li><a href="#quem-somos">Quem Somos</a></li>
+            <li><a href="#como-funciona">Como Funciona</a></li>
+            <li><a href="#planos">Planos</a></li>
+            <li><a href="#fornecedor">Seja Fornecedor</a></li>
+        </ul>
+        <div class="header-contact">
+            <a href="#cotacao" class="btn-header">Solicitar Cotação</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <img src="logo-ecomp_7.png" alt="Ecomp Distribuidora" class="hero-logo">
+            <h1>Inteligência em Suprimentos <span>B2B e B2G</span></h1>
+            <p>Deixe a burocracia de cotações com quem entende. Atuamos como um braço estendido do seu departamento de compras, trazendo o mercado até você.</p>
+            
+            <ul class="benefits-list">
+                <li>Ponto único de contato para todas as compras e demandas</li>
+                <li>Curadoria exaustiva com rede rigorosamente homologada</li>
+                <li>Atendimento especializado a Licitações e Órgãos Públicos (Compliance)</li>
+                <li>Redução expressiva do tempo de ciclo de pedidos e custos ocultos</li>
+            </ul>
+        </div>
+
+        <div class="hero-form-wrapper" id="cotacao">
+            <div class="form-card">
+                <h2>Cotação Rápida</h2>
+                <p>Receba sua proposta via WhatsApp instantaneamente.</p>
+                
+                <form onsubmit="enviarCotacao(event)">
+                    <div class="form-group">
+                        <input type="text" id="empresa" placeholder="Sua Empresa ou Órgão Público" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="E-mail Corporativo" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="telefone_cotacao" placeholder="Telefone / WhatsApp" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="demanda" rows="3" placeholder="O que você precisa cotar hoje?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Enviar via WhatsApp</button>
+                    <p style="font-size: 0.75rem; color: var(--text-gray); margin-top: 15px; margin-bottom: 0;">Seus dados estão protegidos conforme as diretrizes da LGPD.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div class="trust-bar">
+        <div class="trust-item">
+            <h4>Linha Leve e Pesada</h4>
+            <p>Peças, componentes e suprimentos essenciais para frotas.</p>
+        </div>
+        <div class="trust-item">
+            <h4>Ferramentas & MRO</h4>
+            <p>Equipamentos industriais e de alta performance.</p>
+        </div>
+        <div class="trust-item">
+            <h4>Serviços & B2G</h4>
+            <p>Intermediação corporativa e atendimento completo a editais.</p>
+        </div>
+    </div>
+
+    <!-- SEÇÃO QUEM SOMOS -->
+    <section id="quem-somos">
+        <div class="section-header">
+            <h2>Quem <span>Somos</span></h2>
+            <p>Conheça a história e os pilares que tornam a Ecomp referência em inovação e agilidade no mercado B2B e B2G.</p>
+        </div>
+        
+        <div class="sobre-grid">
+            <div class="sobre-card">
+                <h3>Nossa Missão</h3>
+                <p>Otimizar a cadeia de suprimentos de empresas e órgãos públicos, transformando o processo complexo de compras em uma experiência unificada, transparente e altamente econômica.</p>
+            </div>
+            <div class="sobre-card">
+                <h3>Nossa Visão</h3>
+                <p>Ser o principal braço estratégico de Procurement e BPO de compras do Brasil, reconhecida pela excelência em compliance, rapidez e segurança na entrega.</p>
+            </div>
+            <div class="sobre-card">
+                <h3>Nossos Valores</h3>
+                <p>Comprometimento absoluto com prazos, ética rigorosa em licitações públicas e privadas, inovação contínua nos processos e parcerias duradouras com fornecedores homologados.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="como-funciona">
+        <div class="section-header">
+            <h2>Como a Ecomp <span>unifica seu fluxo</span></h2>
+            <p>Eliminamos a fragmentação, complexidade e custos ocultos do seu setor de compras em 4 etapas inteligentes.</p>
+        </div>
+        
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Sua Demanda</h3>
+                <p>Você envia sua necessidade corporativa, projeto ou edital de licitação diretamente ao nosso time.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Nossa Busca</h3>
+                <p>Nossa equipe executa uma varredura exaustiva em nossa rede global de parceiros homologados.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>A Proposta</h3>
+                <p>Apresentamos a solução de maior custo-benefício com faturamento unificado e previsível.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Logística</h3>
+                <p>Gerenciamos todo o transporte até a entrega final com segurança e pontualidade na sua porta.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="planos">
+        <div class="section-header">
+            <h2> Nossos planos<span> (Procurement BPO)</span></h2>
+            <p>Escolha o modelo ideal para acompanhar o volume operacional e financeiro da sua empresa.</p>
+        </div>
+        
+        <div class="planos-grid">
+            <div class="plano-card">
+                <div>
+                    <h3>Essencial</h3>
+                    <div class="plano-preco">R$ 2.500</div>
+                </div>
+                <div class="plano-detalhe">Até 30 demandas / mês</div>
+                <a href="https://wa.me/5519993292597?text=eu%20gostaria%20de%20saber%20mais%20sobre%20o%20plano%20essencial" target="_blank" class="btn-plano">Escolher Essencial</a>
+            </div>
+
+            <div class="plano-card destacado">
+                <div>
+                    <span style="background: var(--primary-blue); color: #fff; font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; font-weight: 700; display: inline-block; margin-bottom: 10px;">MAIS POPULAR</span>
+                    <h3>Profissional</h3>
+                    <div class="plano-preco">R$ 4.500</div>
+                </div>
+                <div class="plano-detalhe">Até 70 demandas / mês</div>
+                <a href="https://wa.me/5519993292597?text=eu%20gostaria%20de%20saber%20mais%20sobre%20o%20plano%20profissional" target="_blank" class="btn-plano">Escolher Profissional</a>
+            </div>
+
+            <div class="plano-card">
+                <div>
+                    <h3>Business</h3>
+                    <div class="plano-preco">R$ 7.500</div>
+                </div>
+                <div class="plano-detalhe">Até 120 demandas / mês</div>
+                <a href="https://wa.me/5519993292597?text=eu%20gostaria%20de%20saber%20mais%20sobre%20o%20plano%20business" target="_blank" class="btn-plano">Escolher Business</a>
+            </div>
+
+            <div class="plano-card">
+                <div>
+                    <h3>Enterprise</h3>
+                    <div class="plano-preco" style="font-size: 1.4rem; padding-top: 5px;">A partir de R$ 10.000</div>
+                </div>
+                <div class="plano-detalhe">Personalizado (Governo / Grandes Corporações)</div>
+                <a href="https://wa.me/5519993292597?text=eu%20gostaria%20de%20saber%20mais%20sobre%20o%20plano%20enterprise" target="_blank" class="btn-plano">Falar com Especialista</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="fornecedor">
+        <div class="fornecedor-wrapper">
+            <div class="fornecedor-text">
+                <h2>Seja um Fornecedor Ecomp</h2>
+                <p>Faça parte da nossa rede de homologados e conecte-se a grandes contas corporativas e órgãos públicos.</p>
+                <ul>
+                    <li>✓ Zero taxas</li>
+                    <li>✓ Diversas cotações diariamente</li>
+                    <li>✓ Previsibilidade e segurança absoluta nos pagamentos</li>
+                </ul>
+            </div>
+            <div class="fornecedor-form">
+                <form onsubmit="enviarFornecedor(event)">
+                    <div class="form-group">
+                        <input type="text" id="razao_social" placeholder="Razão Social" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="cnpj" placeholder="CNPJ" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email_fornecedor" placeholder="E-mail de Contato Corporativo" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="portfolio" rows="3" placeholder="Quais linhas de produtos ou serviços você atende?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Enviar Cadastro por E-mail</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p class="destaque">"Não entregamos apenas produtos; entregamos tempo e tranquilidade."</p>
+        <p>Atendimento Nacional B2B e B2G | Foco em Indústria, Comércio e Setor Público</p>
+        <p style="margin-top: 15px; color: var(--text-white);">ecompdistribuidora@gmail.com | (19) 99329-2597</p>
+        <p style="font-size: 0.85rem; margin-top: 30px; opacity: 0.4;">&copy; 2026 Ecomp. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- BOTÃO WHATSAPP FLUTUANTE -->
+    <a href="https://wa.me/5519993292597" class="float-wa" target="_blank" title="Fale conosco no WhatsApp">
+        💬
+    </a>
+
+    <script>
+        function enviarCotacao(event) {
+            event.preventDefault();
+            const empresa = document.getElementById('empresa').value;
+            const email = document.getElementById('email').value;
+            const telefone = document.getElementById('telefone_cotacao').value;
+            const demanda = document.getElementById('demanda').value;
+            
+            const texto = `*Nova Cotação via Site*%0A%0A*Empresa/Órgão:* ${empresa}%0A*E-mail:* ${email}%0A*Telefone:* ${telefone}%0A*Demanda:* ${demanda}`;
+            window.open(`https://wa.me/5519993292597?text=${texto}`, '_blank');
+        }
+
+        function enviarFornecedor(event) {
+            event.preventDefault();
+            const razao = document.getElementById('razao_social').value;
+            const cnpj = document.getElementById('cnpj').value;
+            const emailF = document.getElementById('email_fornecedor').value;
+            const portfolio = document.getElementById('portfolio').value;
+            
+            const subject = encodeURIComponent("Novo Cadastro de Fornecedor - " + razao);
+            const body = encodeURIComponent(`Razão Social: ${razao}\nCNPJ: ${cnpj}\nE-mail: ${emailF}\nPortfólio/Serviços: ${portfolio}`);
+            
+            window.location.href = `mailto:ecompdistribuidora@gmail.com?subject=${subject}&body=${body}`;
+        }
+    </script>
+</body>
+</html>
